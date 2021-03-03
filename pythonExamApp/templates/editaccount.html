@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Account</title>
+</head>
+<body>
+    <h1>Welcome logged in user: {{loggedInUser.firstName}}</h1>
+    <p><a href="/viewQuotes">Back</p></a>
+
+    <h1>Edit Account</h1>
+    <form action="/editAccount/{{loggedInUser.id}}" method="post">
+        {% csrf_token %}
+    <p>Edit First Name: <input type="text" value ="{{loggedInUser.firstName}}" name="editFirstName" id=""></p>
+    <p>Edit Last Name: <input type="text" value ="{{loggedInUser.lastName}}" name="editLastName" id=""></p>
+    <p>Edit Email: <input type="text" value ="{{loggedInUser.email}}" name="editEmail" id=""></p>
+    <input type="submit" value="Update">
+    </form>
+    
+</body>
+</html>

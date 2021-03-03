@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quote Info</title>
+  </head>
+  <body>
+    <h1>Welcome logged in user: {{loggedInUser.firstName}}</h1>
+
+   {{allUsers.lotsBooks.all}}
+
+    {% for user in oneQuote.users_who_like.all%}
+    <h2>{{oneQuote.author}}</h2>
+    <p>Added by: {{oneQuote.uploaded_by.firstName}}</p>
+    <p>Description: {{oneQuote.description}}</p> 
+    <p>Liked by: {{oneQuote.description}}</p> 
+    <p>Uploaded by: {{oneQuote.uploaded_by}}</p> 
+    {% endfor %}
+
+    {% if oneQuote.uploaded_by == loggedInUser %}
+    <p><a href="/oneQuote/{{oneQuote.id}}/update"><button>Update</button><a></p>
+    {% endif %} 
+    {% if oneQuote.uploaded_by == loggedInUser %}
+    <p><a href="/oneQuote/{{oneQuote.id}}/delete"><button>Delete</button></a><p>
+    {% endif %}
+    <p><a href="/viewQuotes">Back</a></p>
+    <p><a href="/logout">Logout</a></p>
+            
+  </body>
+</html>

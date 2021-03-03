@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static '/css/quotes.css'%}" />
+    <title>Quotes</title>
+  </head>
+  <body>
+    <h1>Welcome logged in user: {{loggedInUser.firstName}}</h1>
+    <a href="/viewAccount/{{loggedInUser.id}}">Edit My Account</a>
+    <p><a href="/logout">Logout</a></p>
+    <p><a href="/">Back</a></p>
+    <div class="container">
+        <div class="allquotes">
+            <h1>All Quotes</h1>
+            {% for quote in allQuotes %}
+            <div class="quoteDiv">
+              <h1>{{quote.author}}</h1>
+              <h3>"{{quote.description}}"</h3>
+              <p>Posted by: <a href="oneQuote/{{quote.id}}">{{quote.uploaded_by.firstName}}</a></p>
+              <p>Number of likes:</p>
+              {% for user in quote.users_who_like.all %}
+              <p>{{ forloop.counter }}</p>
+              {% endfor %}
+              {% if quote.uploaded_by == loggedInUser %}
+              <p><a href="/oneQuote/{{quote.id}}/delete"
+                  ><button>Delete</button></a></p>
+                  {% endif %}
+              <p><a href="/newLike/{{quote.id}}"
+                  ><button>Like</button></a></p>
+             
+              {% if quote.uploaded_by == loggedInUser %}
+              <p><a href="/unLike/{{quote.id}}"
+                  ><button>Un-Like</button></a></p>
+              {% endif %}
+            </div>
+            {% endfor %}
+          </div>
+      <div class="addquote">
+        <h1>Add a New Quote</h1>
+        <form action="/addQuote" method="post">
+          {% csrf_token %}
+          <p>Author:<input type="text" name="formAuthor" id="" /></p>
+          <p>Quote:</p>
+          <textarea name="formDesc" id="" cols="30" rows="10"></textarea>
+          <br />
+          <input type="submit" value="Add Quotes" />
+        </form>
+      </div>
+     
+    </div>
+  </body>
+</html>

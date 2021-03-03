@@ -1,0 +1,15 @@
+.container {
+    width: fit-content;
+    margin: 0 auto;
+    display: flex;
+}
+
+.addquote {
+    padding: 20px;
+    border: solid green 2px;
+}
+
+.allquotes {
+    padding: 20px;
+    border: solid green 2px;
+}
